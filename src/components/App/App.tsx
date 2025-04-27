@@ -24,6 +24,12 @@ type Image = {
   alt_description: string;
 };
 
+type UnsplashApiResponse = {
+  total: number;
+  total_pages: number;
+  results: Image[];
+};
+
 export default function App() {
   const API_KEY = "GnU2hs9ReYiuMdWEXRcnqk-Mt_I8PDyzyRE8gPgO-8I";
 
@@ -73,7 +79,7 @@ export default function App() {
     const fetchImages = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(
+        const response = await axios.get<UnsplashApiResponse>(
           "https://api.unsplash.com/search/photos",
           {
             params: {
